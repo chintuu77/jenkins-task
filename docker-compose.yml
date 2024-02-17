@@ -1,16 +1,19 @@
 version: '3.3'
 services:
   db:
-    image: mysql:8.0.19
-    command: 'default-authentication-plugin=mysql_native_password'
+    image: mysql:8.0.27
+    command: '--default-authentication-plugin=mysql_native_password'
     volumes:
-      - db_data:/var/lib/mysql  # Add a colon here
+      - db_data:/var/lib/mysql
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=wordpress
-      - MYSQL_DATABASE=chintu
-      - MYSQL_USER=vivek
-      - MYSQL_PASSWORD=vivek2143
+      - MYSQL_ROOT_PASSWORD=somewordpress
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=wordpress
+      - MYSQL_PASSWORD=wordpress
+    expose:
+      - 3306
+      - 33060
   wordpress:
     image: wordpress:latest
     ports:
@@ -18,8 +21,11 @@ services:
     restart: always
     environment:
       - WORDPRESS_DB_HOST=db
-      - WORDPRESS_DB_USER=vivek
-      - WORDPRESS_DB_PASSWORD=vivek2143
-      - WORDPRESS_DB_NAME=chintu
+      - WORDPRESS_DB_USER=wordpress
+      - WORDPRESS_DB_PASSWORD=wordpress
+      - WORDPRESS_DB_NAME=wordpress
 volumes:
   db_data:
+
+  
+    
